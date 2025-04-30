@@ -1,0 +1,35 @@
+{
+    "version": 2,
+    "buildCommand": "npm run build",
+    "devCommand": "npm run dev",
+    "outputDirectory": ".next",
+    "functions": {
+      "pages/api/**/*.ts": {
+        "memory": 1024,
+        "maxDuration": 10
+      },
+      "app/api/**/route.ts": {
+        "memory": 1024,
+        "maxDuration": 10
+      }
+    },
+    "env": {
+      "DATABASE_URL": "file:./dev.db"
+    },
+    "build": {
+      "env": {
+        "DATABASE_URL": "file:./dev.db"
+      }
+    },
+    "headers": [
+      {
+        "source": "/api/(.*)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store, max-age=0"
+          }
+        ]
+      }
+    ]
+  }
